@@ -42,6 +42,41 @@ function create_custom_post_type_event(){
     );
 
     register_post_type('products', $args); // used as internal identifier
+
+    $labels2 = array(
+        'name' => 'Parts',
+        'singular_name' => 'Parts',
+        'add_new' => 'Add New',
+        'add_new_item' => 'Add New Parts',
+        'edit_item' => 'Edit Parts',
+        'new_item' => 'New Parts',
+        'view_item' => 'View Parts',
+        'search_items' => 'Search Parts',
+        'not_found' => 'No Parts found',
+        'not_found_in_trash' => 'No Parts found in Trash',
+        'parent_item_colon' => '',
+    );   
+
+    $args2 = array(
+        'label' => __('Parts'),
+        'labels' => $labels2, // from array above
+        'public' => true,
+        'can_export' => true,
+        'show_ui' => true,
+        '_builtin' => false,
+        'capability_type' => 'post',
+        'menu_icon' => 'dashicons-hammer', // from this list
+        'hierarchical' => false,
+        'rewrite' => array( "slug" => "parts" ), // defines URL base
+        'supports'=> array('title', 'thumbnail', 'editor', 'excerpt'),
+        'show_in_nav_menus' => true,
+        'taxonomies' => array( 'event_category', 'post_tag'), // own categories
+        
+    );
+
+    register_post_type('parts', $args2); // used as internal identifier
 }
+
+
 
 ?>

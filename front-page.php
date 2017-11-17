@@ -74,6 +74,43 @@ else :
 		endwhile;
 	endif;
 
+$query_args = array(
+			'post_type' => 'products',
+			'posts_per_page' => 10,
+			'orderby' => 'meta_value_num'
+		);
+
+$result = new WP_Query( $query_args );
+
+
+
+ ?>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<section id="blog">
+				<?php do_action( 'illdy_above_content_after_header' ); ?>
+				<?php
+				if ( $result->have_posts() ) :
+					while ( $result->have_posts() ) :
+						$result->the_post();
+						get_template_part( 'template-parts/content-products', get_post_format() );
+					endwhile;
+					wp_reset_query();
+				else :
+					get_template_part( 'template-parts/content', 'none' );
+				endif;
+				?>
+				<?php do_action( 'illdy_after_content_above_footer' ); ?>
+			</section><!--/#blog-->
+		</div><!--/.col-sm-7-->
+
+	</div><!--/.row-->
+</div><!--/.container-->
+
+<?php
+
+
 	illdy_sections();
 
 endif;
